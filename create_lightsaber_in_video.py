@@ -16,7 +16,7 @@ import imageUnion
 RED = 0
 GREEN = 1
 BLUE = 2
-LIGHTSABERCOLOR = BLUE
+LIGHTSABERCOLOR = GREEN
 
 ## Processing Frame And Andded Gaussian Effect on LightSaber Color Pixels
 def AddGaugasianEffectToHighlighColor(frame):
@@ -39,16 +39,16 @@ def AddGaugasianEffectToHighlighColor(frame):
     if(LIGHTSABERCOLOR == RED) :
         Threshold = 42
     elif (LIGHTSABERCOLOR == GREEN) :
-        Threshold = 12
+        Threshold = 10
     elif (LIGHTSABERCOLOR == BLUE) :
         Threshold = 24
 
     segmentedImage = colorHighlight > Threshold
 
     # Creating Gaussian Filters For Each Color Channel
-    redSigma = 8.0 if LIGHTSABERCOLOR == RED else 1.0 
-    greenSigma = 8.0 if LIGHTSABERCOLOR == GREEN else 1.0 
-    blueSigma = 8.0 if LIGHTSABERCOLOR == BLUE else 1.0 
+    redSigma = 10.0 if LIGHTSABERCOLOR == RED else 1.0 
+    greenSigma = 10.0 if LIGHTSABERCOLOR == GREEN else 1.0 
+    blueSigma = 10.0 if LIGHTSABERCOLOR == BLUE else 1.0 
 
     redGaussianFilter = sk.filters.gaussian(segmentedImage, sigma=redSigma)
     greenGaussianFilter = sk.filters.gaussian(segmentedImage, sigma=greenSigma)
@@ -83,7 +83,7 @@ def AddGaugasianEffectToHighlighColor(frame):
     return filteredFrame
 
 # Leitura e escrita do arquivo.
-filename = './Original_Blue.mp4'
+filename = './Original_Green.mp4'
 originalVideo = imageio.get_reader(filename)
 outVideo = imageio.get_writer('LightSaberVideo.mp4', fps=24)
 

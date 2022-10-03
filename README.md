@@ -18,7 +18,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 ## 🚀 Baixando e Configurando Projeto
 
-> O código está preconfigurado para ler o arquivo "./Original.mp4" e escrever o arquivo "./LightsaberVideo.mp4"
+> O código está preconfigurado para ler o arquivo "./Original.mp4" e escrever o arquivo "./LightSaberVideo.mp4"
 
 Para instalar o projeto, siga estas etapas:
 

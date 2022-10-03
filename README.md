@@ -3,8 +3,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/pumba-dev/create-lightsaber-in-video?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/pumba-dev/create-lightsaber-in-video?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/pumba-dev/create-lightsaber-in-video?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/pumba-dev/create-lightsaber-in-video?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/pumba-dev/create-lightsaber-in-video?style=for-the-badge)
 
 <img src="frame-process-example.png" alt="exemplo de execução do algoritmo sobre um frame">
 

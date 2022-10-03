@@ -66,12 +66,30 @@ def AddGaugasianEffectToHighlighColor(frame):
     filteredFrame = np.dstack((redFilteredChannel.astype(int), greenFilteredChannel.astype(int), blueFilteredChannel.astype(int)))
 
     # Convert SegmentedImage Matrix in a Image and Show
-    plt.subplot(131)
+    plt.subplot(141)
     plt.imshow(colorHighlight)
-    plt.subplot(132)
+    plt.title("Color Highlight")
+    plt.axis('off')
+
+    plt.subplot(142)
     plt.imshow(segmentedImage, cmap='Greys',  interpolation='nearest')
-    plt.subplot(133)
+    plt.title("Segmented Image")
+    plt.axis('off')
+
+    plt.subplot(143)
     plt.imshow(gaussianFrame, cmap='Greys',  interpolation='nearest')
+    plt.title("Gaussian Noise")
+    plt.axis('off')
+
+    plt.subplot(144)
+    plt.imshow(filteredFrame)
+    plt.title("Processed Frame")
+    plt.axis('off')
+
+    plt.tight_layout()
+
+    plt.suptitle('Process of Applying Effect to Frame')
+
     plt.savefig('FrameProcess.png')
 
     return filteredFrame

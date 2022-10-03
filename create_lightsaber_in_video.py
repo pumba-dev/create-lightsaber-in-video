@@ -1,22 +1,17 @@
-import pylab
 import imageio
-import cv2
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-from videoreader import VideoReader
-import cv2
 import skimage as sk
 import numpy as np
 from skimage.morphology import disk, ball
 import imageio
-import sys
-import os
-import imageUnion
+import imageAdd
 
+## Colors Const
 RED = 0
 GREEN = 1
 BLUE = 2
-LIGHTSABERCOLOR = GREEN
+## Set Lightsaber Object Color [RED, GREEN or BLUE]
+LIGHTSABERCOLOR = GREEN 
 
 ## Processing Frame And Andded Gaussian Effect on LightSaber Color Pixels
 def AddGaugasianEffectToHighlighColor(frame):
@@ -39,7 +34,7 @@ def AddGaugasianEffectToHighlighColor(frame):
     if(LIGHTSABERCOLOR == RED) :
         Threshold = 42
     elif (LIGHTSABERCOLOR == GREEN) :
-        Threshold = 10
+        Threshold = 12
     elif (LIGHTSABERCOLOR == BLUE) :
         Threshold = 24
 
@@ -63,14 +58,14 @@ def AddGaugasianEffectToHighlighColor(frame):
     gaussianFrame = np.dstack((redGaussianFilter.astype(int), greenGaussianFilter.astype(int), blueGaussianFilter.astype(int)))
 
     # Adding the Gaussian Filter with the Color Channels
-    redFilteredChannel = imageUnion(redGaussianFilter, redChannel)
-    greenFilteredChannel = imageUnion(greenGaussianFilter, greenChannel)
-    blueFilteredChannel = imageUnion(blueGaussianFilter, blueChannel)
+    redFilteredChannel = imageAdd(redGaussianFilter, redChannel)
+    greenFilteredChannel = imageAdd(greenGaussianFilter, greenChannel)
+    blueFilteredChannel = imageAdd(blueGaussianFilter, blueChannel)
 
     # Creating Frames with Color Channels
     filteredFrame = np.dstack((redFilteredChannel.astype(int), greenFilteredChannel.astype(int), blueFilteredChannel.astype(int)))
 
-     # Convert SegmentedImage Matrix in a Image and Show
+    # Convert SegmentedImage Matrix in a Image and Show
     plt.subplot(131)
     plt.imshow(colorHighlight)
     plt.subplot(132)
@@ -78,29 +73,27 @@ def AddGaugasianEffectToHighlighColor(frame):
     plt.subplot(133)
     plt.imshow(gaussianFrame, cmap='Greys',  interpolation='nearest')
     plt.savefig('FrameProcess.png')
-    #plt.show()
 
     return filteredFrame
 
-# Leitura e escrita do arquivo.
-filename = './Original_Green.mp4'
+
+# Read and Create Videos Archive
+filename = './Original.mp4'
 originalVideo = imageio.get_reader(filename)
 outVideo = imageio.get_writer('LightSaberVideo.mp4', fps=24)
 
-# Iteração entre os frames.
+# Iterate From Frames To Apply Effect
 for i, frame in enumerate(originalVideo):
     # Print Percentage
-
     percent = float((i/originalVideo.count_frames()) * 100)
     print(f'{percent:.2f}% processing...')
 
-    # Processa o frame atual para aplicar o efeito do sabre de luz.
+    # Process Actual Frame and Add Frame to Out Video
     filteredFrame = AddGaugasianEffectToHighlighColor(frame)
     outVideo.append_data(filteredFrame)
 
         
-# Salva o vídeo
+# Save Out Video
 outVideo.close()
-
 print("Effect added to the original video in the file LightSaberVideo.mp4!")
 print("done!")
